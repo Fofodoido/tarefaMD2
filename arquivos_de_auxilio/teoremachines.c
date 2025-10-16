@@ -58,6 +58,7 @@ long int mdc(long int n, long int m){
 }
 
 int main(){
+    printf("Rodrigo Henrique Donato de Souza - 241012374\n");
     long int a,c,e,b,d,f,n1,n2,n3;
     printf("Insira os coeficientes a, c, e das equacoes, inserindo espacos entre eles ou colocando o valor e dando enter.\n ax=b mod n1;\n cx=d mod n2;\n ex=f mod n3\n");
     scanf("%ld %ld %ld",&a,&c,&e);
@@ -66,11 +67,21 @@ int main(){
     printf("Insira os coeficientes n1, n2, n3 das equacoes inserindo espacos entre eles ou colocando o valor e dando enter.\n ax=b mod n1;\n cx=d mod n2;\n ex=f mod n3\n");
     scanf("%ld %ld %ld",&n1,&n2,&n3);
     if (mdc(a,n1)==1 && mdc(c,n2)==1 && mdc(e,n3)==1 && mdc(n1,n2)==1 && mdc(n1,n3)==1 && mdc(n2,n3)==1){
-        int N=n1*n2*n3;
-        b = mod(normalizacao(a,n1)*b,n1);
-        d = mod(normalizacao(c,n2)*d,n2);
-        f = mod(normalizacao(e,n3)*f,n3);
+        long int u1 = mod(normalizacao(a,n1)*b,n1);
+        long int u2 = mod(normalizacao(c,n2)*d,n2);
+        long int u3 = mod(normalizacao(e,n3)*f,n3);
         printf("Equacoes normalizadas:\n \n x=%ld mod %ld;\n x=%ld mod %ld;\n x=%ld mod %ld;\n",b,n1,d,n2,f,n3);
+        long int N=n1*n2*n3;
+        long int N1=n2*n3, N2=n1*n3, N3=n1*n2;
+        printf("Novo sistema a ser resolvido:\n %ldx1=1mod%ld\n %ldx2=1mod%ld\n %ldx3=1mod%ld\n",N1,n1,N2,n2,N3,n3);
+        long int x1 =mod(normalizacao(N1,n1),n1);
+        long int x2=mod(normalizacao(N2,n2),n2);
+        long int x3=mod(normalizacao(N3,n3),n3);
+        printf("Resultados:\n x1=%ldmod%ld\n x2=%ldmod%ld\n x3=%ldmod%ld\n",u1,n1,u2,n2,u3,n3);
+        printf("Calculando o resultado por meio da equacao x=u mod N...\n u = (u1.x1.N1)+(u2.x2.N2)+(u3.x3.N3)\n");
+        long int u = (u1*x1*N1)+(u2*x2*N2)+(u3*x3*N3);
+        long int result_x = mod(u,N);
+        printf("\nX vai ser igual a %ld com as equacoes dadas\n", result_x);
     }else{
         printf("O teorema chines nao pode ser aplicado");
         return 0;
