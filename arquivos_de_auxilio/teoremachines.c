@@ -50,6 +50,7 @@ long int mdc(long int n, long int m){
     printf("Passo: %ld mod %ld = %ld\n", n, m, r);
     while (r != 0){
         d = r;
+        printf("Passo: %ld mod %ld = %ld\n",m,r,m%r);
         r = m % r;
         m = d;
     }
