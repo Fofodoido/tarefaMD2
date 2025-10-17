@@ -89,3 +89,5 @@ Repita o processo para as outras questões, substituindo `questao1` por `questao
 
   * **Nome:** [Rodrigo Henrique Donato de Souza]
   * **Matrícula:** [241012374]
+  * **Nome:** [Raphaela Guimarães de Araujo dos Santos]
+  * **Matrícula:** [190116072]
