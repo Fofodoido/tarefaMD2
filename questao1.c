@@ -244,6 +244,7 @@ FALHA_TOTAL:
 
 int main(){
     printf("Rodrigo Henrique Donato de Souza - 241012374\n");
+    printf("Raphaela Guimarães de Araujo dos Santos - 190116072\n");
     int limite = 100;
     int primos_encontrados[100];
     int total_primos;
