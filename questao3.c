@@ -1,24 +1,31 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h> // Para abs()
 
 int main() {
     int N;
+
+    printf("--- Questao 03: Razao de Eficiencia ---\n");
+    printf("Digite um numero N (entre 1 e 105): ");
     scanf("%d", &N);
+
+    if (N < 1 || N > 105) {
+         printf("Erro: N deve estar no intervalo [1, 105].\n");
+         return 1;
+    }
     
-    printf("Fatoracao de %d:\n", N);
+    printf("\n--- Passo 1: Fatoracao Prima de %d ---\n", N);
     
-    int fatores[100]; // Armazena os fatores primos
-    int expoentes[100]; // Armazena os expoentes
-    int idx = 0; // Índice para os fatores
+    int fatores[100];
+    int expoentes[100];
+    int idx = 0;
     int temp = N;
     
-    // Caso especial para N = 1
     if (N == 1) {
         fatores[idx] = 1;
         expoentes[idx] = 1;
         idx++;
     } else {
-        // Fatoração por Trial Division
         for (int p = 2; p * p <= temp; p++) {
             if (temp % p == 0) {
                 int expoente = 0;
@@ -38,19 +45,18 @@ int main() {
         }
     }
     
-    // Imprime fatores primos e expoentes
     for (int i = 0; i < idx; i++) {
-        printf("Primeiro: %d, Expoente: %d\n", fatores[i], expoentes[i]);
+        printf("Fator: %d, Expoente: %d\n", fatores[i], expoentes[i]);
     }
     
-    // Cálculo de τ(N)
+    printf("\n--- Passo 2: Calculo de tau(N) e sigma(N) ---\n");
+    
     int tau = 1;
     for (int i = 0; i < idx; i++) {
         tau *= (expoentes[i] + 1);
     }
-    printf("tau(%d) = %d\n", N, tau);
+    printf("Calculo intermediario tau(%d) = %d\n", N, tau);
     
-    // Cálculo de σ(N)
     int sigma = 1;
     for (int i = 0; i < idx; i++) {
         int p = fatores[i];
@@ -63,11 +69,13 @@ int main() {
         }
         sigma *= soma;
     }
-    printf("sigma(%d) = %d\n", N, sigma);
+    printf("Calculo intermediario sigma(%d) = %d\n", N, sigma);
     
-    // Cálculo da Razão de Eficiência
-    double razao = (double)tau / sigma;
-    printf("Razao de Eficiencia: %.2f\n", razao);
+    printf("\n--- Passo 3: Calculo da Razao de Eficiencia ---\n");
+    
+    double razao = (double)sigma / tau;
+    printf("Razao = sigma(N) / tau(N) = %d / %d\n", sigma, tau);
+    printf("Resultado final (com duas casas decimais): %.2f\n", razao);
     
     return 0;
 }
